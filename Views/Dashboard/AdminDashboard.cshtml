@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "AdminDashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Admin Dashboard</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- User Management Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Manage Users</h5>
+                </div>
+                <div class="card-body">
+                    <p>Approve or manage users in your system.</p>
+                    <a href="@Url.Action("ApproveUsers", "Account")" class="btn btn-primary">Go to User Approval</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Stats Section -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>System Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <p>View current system stats or activity.</p>
+                    <ul>
+                        <li><strong>Active Users:</strong> @Model.ActiveUsers</li>
+                        <li><strong>Registered Users:</strong> @Model.RegisteredUsers</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary disabled">View Stats (Coming Soon)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Additional Admin Links -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Admin Actions</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><a href="@Url.Action("ApproveUsers", "Account")">Approve Users</a></li>
+                        <li><a href="#">View Reports</a></li>
+                        <li><a href="#">System Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+﻿.validation-message {
+    font-size: 0.875rem;
+    color: red;
+    margin-top: 0.15rem;
+    display: block; /* block করলে নিচে যায় */
+}
+.container {
+    max-height: 100vh; /* screen-এর 80% height */
+    overflow-y: auto; /* scrollbar vertical আসবে */
+    overflow-x: auto; /* horizontal দরকার হলে আসবে */
+
+}
+

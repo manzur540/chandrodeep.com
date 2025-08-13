@@ -1,0 +1,405 @@
+﻿@model Member_App.Models.AccountOpen
+
+@{
+    ViewData["Title"] = "AccountOpen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/accountopen.css" rel="stylesheet" />
+
+
+
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-light text-danger">
+            <h4 class="mb-0 text-center">Account Opening Form</h4>
+        </div>
+        <div class="card-body">
+            <form id="accountForm">
+                @Html.AntiForgeryToken()
+                @* Account Number (Using Tag Helpers) *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="AccountNumber" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="AccountNumber" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* Account Holder Name *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="AccountHolderName" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="AccountHolderName" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="AccountHolderName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* Other form fields using asp-for... (Your existing code was correct here) *@
+                @* Father's Name *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="FathersName" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="FathersName" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="FathersName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* Mother's Name *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="MothersName" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="MothersName" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="MothersName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* National ID *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="NationalID" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="NationalID" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="NationalID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* Contact No *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="ContactNo" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="ContactNo" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* Email *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="Email" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="Email" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* Opening Date *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="AccountOpeningDate" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                        <input asp-for="AccountOpeningDate" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="AccountOpeningDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @* Balance *@
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-3 text-md-end">
+                        <label asp-for="Balance" class="form-label"></label>
+                    </div>
+                    <div class="col-md-6">
+                       
+                        <input asp-for="Balance" class="form-control" data-val-number="Balance must be numeric" />
+                      
+
+                    </div>
+                    <div class="col-md-3">
+                        <span asp-validation-for="Balance" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <!-- Action Buttons -->
+                <div class="row">
+                    <div class="col-sm-9 offset-sm-3">
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="button" id="btnSubmit" class="btn btn-primary">Submit</button>
+                            <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                            <button type="button" id="btnSearch" class="btn btn-info">Search</button>
+                            <button type="button" id="btnUpdate" class="btn btn-warning">Update</button>
+                            <button type="button" id="btnDelete" class="btn btn-danger">Delete</button>
+                            <button type="button" id="btnClear" class="btn btn-secondary">Clear Form</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div id="AccountOpenTableSection">
+        <table class="account-table">
+            <thead>
+                <tr>
+                    <th>Account Number</th>
+                    <th>Account Holder</th>
+                    <th>Father's Name</th>
+                    <th>Mother's Name</th>
+                    <th>National ID</th>
+                    <th>Contact No</th>
+                    <th>Email</th>
+                    <th>Opening Date</th>
+                    <th>Balance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="accountTableBody">
+                <!-- Dynamic rows will appear here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        // ---------- 🔐 ১. Anti‑Forgery টোকেন  ----------
+        function getAFToken() {
+            return $('#accountForm input[name="__RequestVerificationToken"]').val();
+        }
+
+        $(document).ready(function () {
+
+            /* ২. একবারেই ajaxSetup কল করুন – এখন ডকুমেন্ট লোড হয়ে গেছে,
+                  তাই getAFToken() টোকেন ফিরিয়ে দিতে পারবে  */
+            $.ajaxSetup({
+                headers: { 'RequestVerificationToken': getAFToken() }   // () যোগ!
+            });
+
+            // ---------- 🔄 ৩. শেয়ার্ড হেলপার ----------
+            function clearValidation() {
+                const form = $("#accountForm")[0];
+                const validator = $(form).validate();
+                validator.resetForm();
+                $(form).find(".is-invalid").removeClass("is-invalid");
+            }
+
+            function setFormState(isUpdateMode) {
+                $("#btnUpdate, #btnDelete").prop('disabled', !isUpdateMode);
+                $("#btnSubmit, #btnSave, #btnSearch").prop('disabled', isUpdateMode);
+                $("#AccountNumber").prop('readonly', isUpdateMode);
+
+                if (!isUpdateMode) {
+                    $("#accountForm")[0].reset();
+                    clearValidation();
+                    $("#AccountNumber").focus();
+                }
+            }
+
+            // শুরুতে ফর্ম ক্লিয়ার
+            setFormState(false);
+
+            // ---------- 🔍 ৪. SEARCH ----------
+            $("#btnSearch").click(function () {
+                const accNum = $("#AccountNumber").val().trim();
+                if (!accNum) { alert('একটি অ্যাকাউন্ট নম্বর লিখুন!'); return; }
+
+                $.get(`/AccountOpen/GetAccount`, { accountNumber: accNum })
+                    .done(function (account) {
+                        // Optional chaining ব্যবহার না করে সেফ চেক
+                        if (!account) { alert('❌ অ্যাকাউন্ট পাওয়া যায়নি'); return; }
+
+                        $('#AccountHolderName').val(account.accountHolderName);
+                        $('#FathersName').val(account.fathersName);
+                        $('#MothersName').val(account.mothersName);
+                        $('#NationalID').val(account.nationalID);
+                        $('#ContactNo').val(account.contactNo);
+                        $('#Email').val(account.email);
+                        $('#AccountOpeningDate').val(account.accountOpeningDate?.substring(0, 10));
+                        $('#Balance').val(account.balance);
+                        alert('✅ ডাটা লোড হয়েছে');
+                        setFormState(true);
+                    })
+                    .fail(function (xhr) {
+                        alert(xhr.responseJSON?.message || '❌ অ্যাকাউন্ট পাওয়া যায়নি');
+                        setFormState(false);
+                    });
+            });
+
+
+
+
+
+            // ---------- ✏️ ৫. UPDATE ----------
+            $("#btnUpdate").click(function () {
+                if (!$("#accountForm").valid()) return;
+
+                const accountData = {
+                    accountNumber: $("#AccountNumber").val().trim(),
+                    accountHolderName: $('#AccountHolderName').val() || null,
+                    fathersName: $('#FathersName').val() || null,
+                    mothersName: $('#MothersName').val() || null,
+                    nationalID: $('#NationalID').val() || null,
+                    contactNo: $('#ContactNo').val() || null,
+                    email: $('#Email').val() || null,
+                    accountOpeningDate: $('#AccountOpeningDate').val() || null,
+                    balance: $('#Balance').val() ? parseFloat($('#Balance').val()) : null
+                };
+
+                $.ajax({
+                    url: '/AccountOpen/UpdateAccount',
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(accountData)
+                })
+                    .done(res => { alert(res.message); setFormState(false); })
+                    .fail(xhr => { alert(xhr.responseJSON?.message || '❌ আপডেট ব্যর্থ'); });
+            });
+            
+            
+            
+            
+            
+
+
+//                                   //
+                  $("#btnDelete").click(function () {
+            const accNum = $("#AccountNumber").val().trim();
+            if (!accNum) {
+                alert("⚠️ অনুগ্রহ করে অ্যাকাউন্ট নম্বর দিন!");
+                return;
+            }
+
+            if (!confirm(`❗আপনি কি অ্যাকাউন্ট ${accNum} মুছে ফেলতে চান?`)) {
+                return;
+            }
+
+            const token = $('#accountForm input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '/AccountOpen/DeleteAccount',
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: token,
+                    accountNumber: accNum
+                },
+                success: function (response) {
+                    alert(response.message || "✅ ডিলিট সফল হয়েছে!");
+
+                    // ✅ Reload দিয়ে নতুন token লোড হবে
+                    window.location.reload();
+                },
+                error: function (xhr) {
+                    console.error("Status:", xhr.status);
+                    console.error("Response:", xhr.responseText);
+                    alert(xhr.responseJSON?.message || "❌ ডিলিট করতে ব্যর্থ হয়েছে");
+                }
+            });
+        });
+
+
+
+           
+        
+
+
+
+            // ---------- ➕ ৭. SUBMIT (টেবিলে যোগ) ----------
+            $("#btnSubmit").click(function () {
+                if (!$("#accountForm").valid()) return;
+
+                const accNum = $('#AccountNumber').val().trim();
+                // একই অ্যাকাউন্ট দ্বিতীয়বার তালিকায় তুলতে না দেওয়া
+                if ($(`#accountTableBody tr[data-account-number="${accNum}"]`).length) {
+                    alert('এই অ্যাকাউন্ট নম্বর ইতিমধ্যে তালিকায় আছে।');
+                    return;
+                }
+
+                const balance = parseFloat($('#Balance').val() || 0).toFixed(2);
+                const newRow = `
+                           <tr data-account-number="${accNum}"
+                               data-account-holder-name="${$('#AccountHolderName').val()}"
+                               data-fathers-name="${$('#FathersName').val()}"
+                               data-mothers-name="${$('#MothersName').val()}"
+                               data-national-id="${$('#NationalID').val()}"
+                               data-contact-no="${$('#ContactNo').val()}"
+                               data-email="${$('#Email').val()}"
+                               data-opening-date="${$('#AccountOpeningDate').val()}"
+                               data-balance="${balance}">
+                               <td>${accNum}</td>
+                               <td>${$('#AccountHolderName').val()}</td>
+                               <td>${$('#FathersName').val()}</td>
+                               <td>${$('#MothersName').val()}</td>
+                               <td>${$('#NationalID').val()}</td>
+                               <td>${$('#ContactNo').val()}</td>
+                               <td>${$('#Email').val()}</td>
+                               <td>${$('#AccountOpeningDate').val()}</td>
+                               <td>${balance}</td>
+                               <td><button class="btn btn-sm btn-danger btn-remove-from-list">Remove</button></td>
+                           </tr>`;
+                $("#accountTableBody").append(newRow);
+                setFormState(false);
+            });
+
+            // ---------- 💾 ৮. SAVE (সার্ভারে পাঠানো) ----------
+            $("#btnSave").click(function () {
+                const accountsToSave = [];
+                $("#accountTableBody tr").each(function () {
+                    const row = $(this);
+
+                    // ⚠️ jQuery এর .data() ব্যবহার করলে data-attr‑এর dash‑case ➡️ camelCase হয়।
+                    accountsToSave.push({
+                        accountNumber: row.data("accountNumber"),
+                        accountHolderName: row.data("accountHolderName") || null,
+                        fathersName: row.data("fathersName") || null,
+                        mothersName: row.data("mothersName") || null,
+                        nationalID: row.data("nationalId") || null,
+                        contactNo: row.data("contactNo") || null,
+                        email: row.data("email") || null,
+                        accountOpeningDate: row.data("openingDate") || null,
+                        balance: row.data("balance") ? parseFloat(row.data("balance")) : null
+                    });
+                });
+
+                if (!accountsToSave.length) { alert("তালিকায় কোনো ডাটা নেই!"); return; }
+
+                $.ajax({
+                    url: '/AccountOpen/SaveAllAccounts',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(accountsToSave)
+                })
+                    .done(res => { alert(res.message); $("#accountTableBody").empty(); })
+                    .fail(xhr => { alert(xhr.responseJSON?.message || '❌ সেভ ব্যর্থ'); });
+            });
+
+            // ---------- ❌ ৯. লাইনে Remove ----------
+            $('#accountTableBody').on('click', '.btn-remove-from-list', function () {
+                $(this).closest('tr').remove();
+            });
+
+            // ---------- 🧹 ১০. Clear ----------
+            $("#btnClear").click(() => setFormState(false));
+        });
+    </script>
+}

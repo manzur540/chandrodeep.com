@@ -1,0 +1,66 @@
+﻿@model Member_App.Models.Member
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-danger text-white text-center">
+            <h4 class="mb-0">Confirm Delete</h4>
+        </div>
+
+        <div class="card-body">
+            <h5 class="text-danger">Are you sure you want to delete this member?</h5>
+
+
+            <form asp-action="DeleteConfirmed" asp-route-id="@Model.ID" method="post">
+                @Html.AntiForgeryToken()
+
+                <dl class="row">
+                    <dt class="col-sm-3">ID</dt>
+                    <dd class="col-sm-9">@Model.ID</dd>
+
+                    <dt class="col-sm-3">Name</dt>
+                    <dd class="col-sm-9">@Model.Name</dd>
+
+                    <dt class="col-sm-3">Address</dt>
+                    <dd class="col-sm-9">@Model.Address</dd>
+
+                    <dt class="col-sm-3">Department</dt>
+                    <dd class="col-sm-9">@Model.Department</dd>
+
+                    <dt class="col-sm-3">Unique ID</dt>
+                    <dd class="col-sm-9">@Model.Unique_ID</dd>
+
+                    <dt class="col-sm-3">Email</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+
+                    <dt class="col-sm-3">Phone</dt>
+                    <dd class="col-sm-9">@Model.Phone</dd>
+
+                    <dt class="col-sm-3">Image</dt>
+                    <dd class="col-sm-9">
+                        @if (!string.IsNullOrEmpty(Model.Image))
+                        {
+                            <img src="@Model.Image" class="img-thumbnail" style="width:100px; height:100px;" />
+                        }
+                        else
+                        {
+                            <span class="text-muted fst-italic">No Image</span>
+                        }
+                    </dd>
+                </dl>
+
+                <!-- ✅ Submit & Cancel buttons -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-danger me-2">Delete</button>
+                    <a asp-action="List" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

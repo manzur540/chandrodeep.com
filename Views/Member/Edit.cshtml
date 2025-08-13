@@ -1,0 +1,132 @@
+﻿@model Member_App.Models.Member
+
+@{
+    ViewData["Title"] = "Edit Member";
+}
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light text-center">
+                    <h4 class="text-success">Edit Member</h4>
+                </div>
+
+                <div class="card-body">
+                    <form id="editForm" enctype="multipart/form-data" novalidate>
+                        @Html.AntiForgeryToken()
+
+                        <!-- Hidden fields -->
+                        <input type="hidden" name="ID" value="@Model.ID" />
+                        <input type="hidden" name="Image" value="@Model.Image" />
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Name)
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Address -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Address)
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Department -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Department)
+                            @Html.TextBoxFor(m => m.Department, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Department, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Unique ID -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Unique_ID)
+                            @Html.TextBoxFor(m => m.Unique_ID, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Unique_ID, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required", type = "email" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Phone)
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                        </div>
+
+                        <!-- Current Image -->
+                        <div class="mb-3">
+                            <label>Current Image:</label><br />
+                            @if (!string.IsNullOrEmpty(Model.Image))
+                            {
+                                <img src="@Model.Image" width="120" class="img-thumbnail mb-2" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">No image</span>
+                            }
+                        </div>
+
+                        <!-- New Image -->
+                        <div class="mb-3">
+                            <label>Change Image (Optional)</label>
+                            <input type="file" name="file" class="form-control" accept="image/*" />
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Update Member</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        $(document).ready(function () {
+            // ✅ enable jquery validation
+            $("#editForm").validate();
+
+            $("#editForm").submit(function (e) {
+                e.preventDefault();
+
+                // ✅ এখন validate হবে
+                if (!$("#editForm").valid()) {
+                    return;
+                }
+
+                var formData = new FormData(this);
+                var id = $("input[name='ID']").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Member/Edit/" + id,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            window.location.href = "/Member/List";
+                        } else {
+                            alert("❌ " + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("❌ Failed to update member.");
+                    }
+                });
+            });
+        });
+    </script>
+}

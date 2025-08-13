@@ -1,0 +1,105 @@
+﻿@model Member_App.Models.AccountTransactionModel
+@{
+    ViewBag.Title = "Account Transaction";
+    var accounts = ViewBag.Accounts as List<SelectListItem>;
+}
+
+<style>
+    .field-validation-error {
+        color: #b94a48;
+        font-size: .875em;
+    }
+</style>
+
+<form id="transForm" method="post" novalidate>
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4 class="mb-0 text-center text-primary">Account Transaction</h4>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="mb-1">
+                            <label asp-for="AccountNumber" class="form-label"></label>
+                            <input asp-for="AccountNumber" type="text" class="form-control" onblur="getBalance()" />
+                            <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-1">
+                            <label asp-for="AccountHolderName" class="form-label"></label>
+                            <input asp-for="AccountHolderName" type="text" class="form-control" readonly />
+                        </div>
+
+                        <div class="mb-1">
+                            <label asp-for="BalanceBefore" class="form-label"></label>
+                            <input asp-for="BalanceBefore" type="text" class="form-control" readonly />
+                        </div>
+
+                        <div class="mb-1">
+                            <label asp-for="TransType" class="form-label"></label>
+                            <select asp-for="TransType" class="form-select" onchange="calcNewBalance()">
+                                <option value="CR">Credit (CR)</option>
+                                <option value="DR">Debit (DR)</option>
+                            </select>
+                            <span asp-validation-for="TransType" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-1">
+                            <label asp-for="Description" class="form-label"></label>
+                            <input asp-for="Description" type="text" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-1">
+                            <label asp-for="TransAmount" class="form-label"></label>
+                            
+                            <input asp-for="TransAmount" type="number" step="any" class="form-control" oninput="calcNewBalance()" />
+
+                            <span asp-validation-for="TransAmount" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-1">
+                            <label asp-for="NewBalance" class="form-label"></label>
+                            <input asp-for="NewBalance" type="text" class="form-control" readonly />
+                        </div>
+                       
+
+                        <div class="d-flex gap-2 mb-1">
+                            <button type="submit" class="btn btn-success" id="btnSave">💾 Save</button>
+
+                            <div class="input-group" style="width:125px;">
+                                <input asp-for="TransId" type="text" class="form-control" placeholder="Tr.ID" />
+                                <button type="button" class="btn btn-info" id="btnSearch">🔍</button>
+                            </div>
+
+                            <button type="button" class="btn btn-warning" id="btnUpdate">🔁 Update</button>
+                            <button type="button" class="btn btn-danger" id="btnDelete">🗑️ Delete</button>
+                        </div>
+                        
+                     
+                      
+
+                
+
+
+                        <input type="hidden" asp-for="TransactionDate"
+                               value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/transaction.js"></script>
+}

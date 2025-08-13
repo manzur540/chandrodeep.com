@@ -1,0 +1,162 @@
+﻿@model Member_App.Models.Login
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Chandrodeep Owners Association</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/css/login.css" rel="stylesheet" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <img src="@Url.Content("~/webimage/logo.png")" alt="Chandrodeep Logo" class="logo" />
+                <div class="header-text">
+                    <h2>Chandrodeep Owners Association</h2>
+                    <p>Building a Better Community Together</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <div class="container-fluid login-section">
+
+        
+        
+        <!-- Register -->
+        <div class="row h-100 align-items-center">
+            <!-- Register on left, left-aligned -->
+            <div class="col-md-4 register-section">
+                <div class="register-card text-start p-4">
+                    <p>Join with us by creating your account !</p>
+                    <a class="btn custom-register-btn w-100" href="/Account/Register">Register Now</a>
+                </div>
+            </div>
+
+
+            <!-- Center Image -->
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <img src="/webimage/home.jpg" alt="Demo Image" class="Home-image" />
+            </div>
+
+            <!-- Login -->
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="w-75">
+                    <h2 class="login-title">Access your account.</h2>
+
+                    <form method="post" asp-action="Login" asp-controller="Account" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                        
+                            <input asp-for="Phone" class="form-control" placeholder="Enter your Phone Number" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                         
+                            <input asp-for="PasswordHash" type="password" class="form-control" placeholder="Enter your password" />
+                            <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <a href="@Url.Action("ForgotPassword", "Account")" class="text-decoration-none">
+                            <i class="bi bi-question-circle"></i> Forgot your password?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="container my-1">
+        <div class="row justify-content-center">
+            <div class="col-md-10 text-center">
+          
+                <p class="lead text-muted">
+                    Welcome to the Chandrodeep Owners Association! We are dedicated to providing a seamless platform
+                    for managing your property, community services, and exclusive member benefits.
+                </p>
+                <p>
+                    Our platform allows you to register easily, log in securely, and stay updated with the latest
+                    news, reports, and announcements.
+                </p>
+               
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Cards -->
+    <div class="container mt-0">
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="img_avatar.png" class="card-img-top" alt="Avatar">
+                    <div class="card-body">
+                        <h4 class="card-title">John Doe</h4>
+                        <p class="card-text">Architect & Engineer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="img_avatar.png" class="card-img-top" alt="Avatar">
+                    <div class="card-body">
+                        <h4 class="card-title">Jane Smith</h4>
+                        <p class="card-text">Interior Designer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="img_avatar.png" class="card-img-top" alt="Avatar">
+                    <div class="card-body">
+                        <h4 class="card-title">Mike Ross</h4>
+                        <p class="card-text">Project Manager</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="text">
+                🔔 Latest: New member registration form implemented with jQuery and ADO.NET...
+                🌐 Live report generation with Rotativa now active...
+                🚀 Tip: ASP.NET Core MVC is super flexible!
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        window.onload = function () {
+            var errorMsg = '@ViewBag.Error';
+            if (errorMsg) {
+                alert(errorMsg);
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+﻿html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding-top: 80px;
+    padding-bottom: 60px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f0f0f0;
+    z-index: 1000;
+    display: flex;
+    align-items: center; /* Vertically center items */
+    justify-content: center; /* Center entire content horizontally */
+    padding: 10px 30px;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Optional: Wrap logo and text in a container */
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Logo */
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+/* Text */
+.header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.2;
+    text-align: left;
+}
+
+    .header-text h2 {
+        margin: 0;
+        font-size: 30px;
+        color: #B22222; /* Brick red */
+        font-weight: 700; /* Makes text bold */
+        font-family: 'Playfair Display', serif; /* Elegant and professional */
+    }
+
+    .header-text p {
+        margin: 0;
+        font-size: 14px;
+        color: #555;
+        font-family: 'Raleway', sans-serif; /* Sleek and readable */
+    }
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #f0f0f0;
+    color: black;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+    .footer .text {
+        display: inline-block;
+        padding-left: 100%;
+        white-space: nowrap;
+        font-weight: bold;
+        animation: slide-left 15s linear infinite;
+        color:red;
+    }
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Content */
+.login-section {
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: white;
+    border-left: 1px solid #ccc; /* Left border */
+    border-right: 1px solid #ccc; /* Right border */
+}
+
+.card {
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card img {
+        height: 100px;
+        object-fit: cover;
+    }
+
+section {
+    padding: 0;
+}
+
+    section h2 {
+        font-weight: bold;
+        color: #333;
+        margin-top: 0;
+        padding: 0;
+    }
+
+    section p.lead {
+        font-size: 1.2rem;
+        line-height: 1.8;
+    }
+
+    section.container.my-1 {
+        padding-top: 10px;
+    }
+
+    section h2, section p {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+.Home-image {
+    width: 100%;
+    height: 550px;
+    display: block;
+    margin: 10px auto 20px;
+ 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+.nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1200px !important;
+    }
+}
+.custom-register-btn {
+    background-color: #B22222; /* Brick red */
+    color: white;
+    border: none;
+}
+
+    .custom-register-btn:hover {
+        background-color: #8B1A1A; /* Darker on hover */
+        color: white;
+    }
+.login-title {
+    color: #B22222;
+}
+
+.register-card {
+    background: #fff;
+    border-radius: 0px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 600px;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.2s ease-in-out;
+
+ 
+    background-image: url('../webimage/gemin.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+
+    .register-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .register-card p {
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 400px; 
+        margin-bottom: 0px;
+    }
+

@@ -1,0 +1,108 @@
+﻿/* Container styling */
+#AccountOpenTableSection {
+    padding: 10px;
+    overflow-x: auto;
+    min-height: 120px;
+    overflow-y: auto;
+    overflow: scroll;
+}
+
+/* Table style */
+table.account-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    table-layout: fixed; /* Important for fixed column widths */
+}
+
+    /* Header */
+    table.account-table thead {
+        background-color: #d4edda;
+    }
+
+    /* Column width and wrap fix */
+    table.account-table th,
+    table.account-table td {
+        border: 1px solid #ccc;
+        padding: 8px 10px;
+        text-align: left;
+        vertical-align: middle;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+
+        /* Fixed widths for each column */
+        table.account-table th:nth-child(1),
+        table.account-table td:nth-child(1) {
+            width: 120px;
+        }
+
+        table.account-table th:nth-child(2),
+        table.account-table td:nth-child(2) {
+            width: 140px;
+        }
+
+        table.account-table th:nth-child(3),
+        table.account-table td:nth-child(3) {
+            width: 120px;
+        }
+
+        table.account-table th:nth-child(4),
+        table.account-table td:nth-child(4) {
+            width: 120px;
+        }
+
+        table.account-table th:nth-child(5),
+        table.account-table td:nth-child(5) {
+            width: 130px;
+        }
+
+        table.account-table th:nth-child(6),
+        table.account-table td:nth-child(6) {
+            width: 110px;
+        }
+
+        table.account-table th:nth-child(7),
+        table.account-table td:nth-child(7) {
+            width: 160px;
+        }
+
+        table.account-table th:nth-child(8),
+        table.account-table td:nth-child(8) {
+            width: 100px;
+        }
+
+        table.account-table th:nth-child(9),
+        table.account-table td:nth-child(9) {
+            width: 90px;
+        }
+
+        table.account-table th:nth-child(10),
+        table.account-table td:nth-child(10) {
+            width: 80px;
+        }
+
+    /* Hover */
+    table.account-table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    table.account-table {
+        font-size: 11px;
+    }
+
+        table.account-table th,
+        table.account-table td {
+            padding: 6px;
+        }
+}
+
+/* Card width control */
+.card {
+    max-width: 1300px;
+    margin: 0 auto;
+}

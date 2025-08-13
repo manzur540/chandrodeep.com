@@ -1,0 +1,84 @@
+﻿@model List<Member_App.Models.AccountOpen>
+
+@{
+    Layout = null;
+    decimal totalBalance = 0;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Account Balance Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* CORRECTED: This style rule targets the footer cells */
+        tfoot td {
+            font-weight: bold;
+            border: none; /* Removes the border */
+        }
+    </style>
+</head>
+<body>
+    <h2>Account Balance Report</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>Account Holder Name </th>
+                 <th>Contact No</th>
+              <th>Opening Date</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                totalBalance += item.Balance.GetValueOrDefault();
+                <tr>
+                    <td>@item.AccountNumber</td>
+                    <td>@item.AccountHolderName</td>
+                   
+                    <td>@item.ContactNo</td>
+              
+                    <td>@item.AccountOpeningDate?.ToString("dd-MMM-yyyy")</td>
+                    <td>@item.Balance?.ToString("N2")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align: right;">Total Balance:</td>
+                <td>@totalBalance.ToString("N2")</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
+
+

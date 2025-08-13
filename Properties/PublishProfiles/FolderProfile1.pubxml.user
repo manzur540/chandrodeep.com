@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Member_App\Member_App\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2025-08-13T15:44:10.2141325Z||;True|2025-08-13T21:30:24.9439855+06:00||;True|2025-08-11T23:24:17.4210017+06:00||;True|2025-08-11T22:14:59.7356063+06:00||;True|2025-08-11T22:13:39.9444971+06:00||;True|2025-08-11T22:11:36.1515063+06:00||;</History>
+    <LastFailureDetails />
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=localhost\SQLEXPRESS01%3bInitial Catalog=member%3bIntegrated Security=True%3bTrustServerCertificate=Yes</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

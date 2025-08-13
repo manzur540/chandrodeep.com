@@ -1,0 +1,82 @@
+﻿.table-wrapper {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    min-height: 200px;
+    overflow-x: hidden;  /* ✅ stop horizontal scroll */
+    opacity: 0;          /* for fade-in effect */
+}
+
+/* Table styles */
+#membersTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    table-layout: auto; /* ✅ flexible column widths */
+}
+
+#membersTable th, #membersTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+    box-sizing: border-box;
+    white-space: normal;         /* ✅ allow line wrap */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Image styling */
+#membersTable td img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+    border-radius: 4px;
+}
+
+/* Buttons */
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: black;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+/* Column width override (fallback) */
+#membersTable th:nth-child(8),
+#membersTable td:nth-child(8) {
+    width: 70px;
+}
+
+#membersTable th:nth-child(9),
+#membersTable td:nth-child(9) {
+    width: 160px;
+}
+
+#membersTable td a {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: unset;
+}
+
+#membersTable,
+#membersTable * {
+    transition: none !important;
+    animation: none !important;
+}

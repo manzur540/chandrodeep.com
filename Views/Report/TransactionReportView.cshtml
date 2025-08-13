@@ -1,0 +1,102 @@
+﻿@model Member_App.Models.TransactionReportViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Account Transaction Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+            margin: 20px;
+        }
+
+        .header-container {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .org-name {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .report-info p {
+            margin: 6px 0; /* লাইনের মাঝে gap */
+        }
+
+        .report-info {
+            margin-bottom: 20px; /* table এর আগে gap */
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="org-name">Chandrodeep Owner Association</div>
+    </div>
+
+    <h2>Account Transaction Report</h2>
+    <div class="report-info">
+        <p><strong>Account No:</strong> @Model.AccountNumber</p>
+        <p><strong>Account Holder Name:</strong> @Model.AccountHolderName</p>
+        <p><strong>Date Range:</strong> @Model.DateRange</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date & Time</th>
+                <th>Trans ID</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Transactions)
+            {
+                <tr>
+                    <td>@item.TransactionDate.ToString("dd-MMM-yyyy hh:mm tt")</td>
+                    <td>@item.TransId</td>
+                    <td>@item.TransType</td>
+                    <td>@item.Description</td>
+                    <td>@item.TransAmount.ToString("N2")</td>
+                    <td>@item.NewBalance</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

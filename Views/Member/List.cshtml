@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Member_App.Models.Member>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/list.css" rel="stylesheet" />
+
+<h2 style="text-align: center; color: darkred;">Members List</h2>
+
+<div class="table-wrapper" style="min-height: 500px; overflow-x: hidden; opacity: 0;">
+    <table id="membersTable" style="width:100%;">
+
+
+        <thead>
+            <tr>
+                <th style="width:50px;">ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Department</th>
+                <th>Unique ID</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th style="width:70px;">Image</th>
+                <th style="width:160px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Name</td>
+                    <td>@item.Address</td>
+                    <td>@item.Department</td>
+                    <td>@item.Unique_ID</td>
+                    <td>@item.Email</td>
+                    <td>@item.Phone</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.Image))
+                        {
+                            <img src="@item.Image" alt="Image" />
+                        }
+                        else
+                        {
+                            <span>No Image</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID" class="edit-btn">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+
+   
+<script>
+    $(document).ready(function () {
+        $('#membersTable').DataTable({
+            autoWidth: false,
+            scrollX: true,
+            columnDefs: [
+                { orderable: false, targets: [7, 8] }
+            ],
+            initComplete: function () {
+                $('.table-wrapper').css({
+                    'opacity': '1',
+                    'transition': 'opacity 0.3s ease-in-out'
+                });
+            }
+        });
+    });
+</script>
+}
+
+
+
+

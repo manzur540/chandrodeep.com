@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewData["Title"] = "GetRecords";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetRecords</h1>
+
+@{
+    ViewData["Title"] = "Account Open Management";
+}
+
+<h2>Account Open Management</h2>
+
+<form id="accountForm">
+    <div>
+        <label>Account Number:</label><br />
+        <input type="text" id="AccountNumber" name="AccountNumber" required />
+    </div>
+    <div>
+        <label>Account Holder Name:</label><br />
+        <input type="text" id="AccountHolderName" name="AccountHolderName" />
+    </div>
+    <div>
+        <label>Father's Name:</label><br />
+        <input type="text" id="FathersName" name="FathersName" />
+    </div>
+    <div>
+        <label>Mother's Name:</label><br />
+        <input type="text" id="MothersName" name="MothersName" />
+    </div>
+    <div>
+        <label>National ID:</label><br />
+        <input type="text" id="NationalID" name="NationalID" />
+    </div>
+    <div>
+        <label>Contact No:</label><br />
+        <input type="text" id="ContactNo" name="ContactNo" />
+    </div>
+    <div>
+        <label>Email:</label><br />
+        <input type="email" id="Email" name="Email" />
+    </div>
+    <div>
+        <label>Account Opening Date:</label><br />
+        <input type="date" id="AccountOpeningDate" name="AccountOpeningDate" />
+    </div>
+    <div>
+        <label>Balance:</label><br />
+        <input type="number" step="0.01" id="Balance" name="Balance" />
+    </div>
+
+    <br />
+    <button type="submit">Add Account</button>
+</form>
+
+<hr />
+
+<table id="accountsTable" border="1" cellpadding="5" cellspacing="0" style="width:100%;">
+    <thead>
+        <tr>
+            <th>Account Number</th>
+            <th>Account Holder Name</th>
+            <th>Father's Name</th>
+            <th>Mother's Name</th>
+            <th>National ID</th>
+            <th>Contact No</th>
+            <th>Email</th>
+            <th>Opening Date</th>
+            <th>Balance</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Accounts loaded here -->
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            // Load all accounts and populate table
+            function loadAccounts() {
+                $.ajax({
+                    url: '/AccountOpen/GetRecords',
+                    method: 'GET',
+                    success: function (accounts) {
+                        let rows = '';
+                        accounts.forEach(function (a) {
+                            rows += `<tr data-id="${a.accountNumber}">
+                                        <td>${a.accountNumber}</td>
+                                        <td>${a.accountHolderName || ''}</td>
+                                        <td>${a.fathersName || ''}</td>
+                                        <td>${a.mothersName || ''}</td>
+                                        <td>${a.nationalID || ''}</td>
+                                        <td>${a.contactNo || ''}</td>
+                                        <td>${a.email || ''}</td>
+                                        <td>${new Date(a.accountOpeningDate).toLocaleDateString()}</td>
+                                        <td>${a.balance.toFixed(2)}</td>
+                                        <td>
+                                            <button class="editBtn">Edit</button>
+                                            <button class="deleteBtn">Delete</button>
+                                        </td>
+                                    </tr>`;
+                        });
+                        $('#accountsTable tbody').html(rows);
+                    }
+                });
+            }
+
+            loadAccounts();
+
+            // Add new account via AJAX
+            $('#accountForm').submit(function (e) {
+                e.preventDefault();
+
+                let model = {
+                    AccountNumber: $('#AccountNumber').val(),
+                    AccountHolderName: $('#AccountHolderName').val(),
+                    FathersName: $('#FathersName').val(),
+                    MothersName: $('#MothersName').val(),
+                    NationalID: $('#NationalID').val(),
+                    ContactNo: $('#ContactNo').val(),
+                    Email: $('#Email').val(),
+                    AccountOpeningDate: $('#AccountOpeningDate').val(),
+                    Balance: parseFloat($('#Balance').val()) || 0
+                };
+
+                $.ajax({
+                    url: '/AccountOpen/AccountOpen',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(model),
+                    success: function (res) {
+                        alert('Account added successfully!');
+                        $('#accountForm')[0].reset();
+                        loadAccounts();
+                    },
+                    error: function () {
+                        alert('Error adding account.');
+                    }
+                });
+            });
+
+            // Handle Delete button click
+            $('#accountsTable').on('click', '.deleteBtn', function () {
+                let row = $(this).closest('tr');
+                let id = row.data('id');
+
+                if (confirm('Are you sure you want to delete this account?')) {
+                    $.ajax({
+                        url: '/AccountOpen/Delete',
+                        method: 'POST',
+                        data: { id: id },
+                        success: function (res) {
+                            alert('Account deleted successfully!');
+                            loadAccounts();
+                        },
+                        error: function () {
+                            alert('Error deleting account.');
+                        }
+                    });
+                }
+            });
+
+            // Handle Edit button click (optional: you can implement edit logic here)
+            // For example, you can fill the form with selected row data for editing.
+
+        });
+    </script>
+}

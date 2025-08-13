@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Member_App.Models.AccountTransactionModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Pending Transactions</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 30px;
+        }
+
+        .table-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h3 {
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container table-container">
+        <h3 class="text-warning text-center">Pending Transactions (Need Approval)</h3>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Trans. ID</th>
+                        <th>Account Number</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        foreach (var trans in Model)
+                        {
+                            <tr>
+                                <td>@trans.TransId</td>
+                                <td>@trans.AccountNumber</td>
+                                <td>@trans.TransType</td>
+                                <td>@trans.TransAmount</td>
+                                <td>@trans.Description</td>
+                                <td>
+                                    <form asp-controller="AccountTransaction" asp-action="ApproveTransaction" method="post" style="display:inline-block">
+                                        <input type="hidden" name="transId" value="@trans.TransId" />
+                                        <button type="submit" class="btn btn-success btn-sm">✔ Approve</button>
+                                    </form>
+
+                                    <form asp-controller="AccountTransaction" asp-action="DeleteTransaction" method="post" style="display:inline-block"
+                                          onsubmit="return confirm('Are you sure to delete this transaction?');">
+                                        <input type="hidden" name="transId" value="@trans.TransId" />
+                                        <button type="submit" class="btn btn-danger btn-sm">🗑 Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-muted">No pending transactions found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

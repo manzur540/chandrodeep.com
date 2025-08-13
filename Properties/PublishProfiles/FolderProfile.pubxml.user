@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Member_App\Member_App\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2025-08-11T16:10:17.0387862Z||;True|2025-08-11T22:05:33.2276412+06:00||;False|2025-08-11T22:02:33.0604970+06:00||;False|2025-08-11T21:55:24.6914453+06:00||;False|2025-08-11T21:53:28.5637873+06:00||;False|2025-08-11T21:50:38.7203225+06:00||;False|2025-08-11T21:49:12.4159259+06:00||;False|2025-08-11T21:36:41.6004531+06:00||;False|2025-08-11T21:27:29.1563232+06:00||;False|2025-08-11T21:24:33.9795268+06:00||;False|2025-08-11T21:18:02.9771109+06:00||;False|2025-08-11T21:14:04.6728164+06:00||;True|2025-04-25T21:54:21.2601781+06:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

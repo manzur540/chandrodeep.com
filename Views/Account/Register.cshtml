@@ -1,0 +1,84 @@
+﻿@model Member_App.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register - Member_App</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h2 class="text-center mb-4">Register</h2>
+
+                <form id="registerForm" asp-action="Register" asp-controller="Account" method="post">
+
+                    <div class="mb-3">
+                        <label asp-for="Phone" class="form-label"></label>
+                        <input asp-for="Phone" class="form-control" placeholder="Enter your Phone Number" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PasswordHash" class="form-label"></label>
+                        <input asp-for="PasswordHash" type="password" class="form-control" placeholder="Enter your password" />
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label"></label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm your password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a asp-action="Login" asp-controller="Account">Login here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const successMessage = '@Html.Raw(ViewBag.Success)';
+            const errorMessage = '@Html.Raw(ViewBag.Error)';
+
+            if (successMessage) {
+                alert(successMessage);
+
+                // পরিবর্তন: form.reset() এর পরিবর্তে প্রতিটি ইনপুট ফিল্ডকে ম্যানুয়ালি খালি করা
+
+                // পিওর জাভাস্ক্রিপ্ট ব্যবহার করে সমাধান
+                document.getElementById('Phone').value = '';
+                document.getElementById('PasswordHash').value = '';
+                document.getElementById('ConfirmPassword').value = '';
+
+                // অথবা jQuery ব্যবহার করে আরও সহজ সমাধান (যেহেতু আপনার প্রকল্পে jQuery আছে)
+                // $('#registerForm')[0].reset(); // এটিও কাজ করতে পারে, তবে নিচেরটি বেশি নিশ্চিত
+                // $('#registerForm input').val('');
+
+            }
+
+            if (errorMessage) {
+                alert(errorMessage);
+            }
+        });
+    </script>
+
+</body>
+</html>

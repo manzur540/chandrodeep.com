@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Member_App.Models.User>
+
+@{
+    ViewData["Title"] = "Approve Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="fas fa-user-check me-2"></i>Pending User Approvals</h4>
+        </div>
+        <div class="card-body">
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-circle-check me-2"></i>
+                    <strong>Success!</strong> @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Error!</strong> @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">User ID</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.Id</td>
+                                    <td>@user.Phone</td>
+                                    <td class="text-center">
+                                        <form method="post" asp-action="UpdateUserApproval" asp-controller="Account" style="display:inline;">
+                                            <input type="hidden" name="id" value="@user.Id" />
+                                            <button type="submit" name="isApproved" value="true" class="btn btn-sm btn-success">
+                                                <i class="fas fa-check"></i> Approve
+                                            </button>
+                                        </form>
+                                        <form method="post" asp-action="UpdateUserApproval" asp-controller="Account" style="display:inline;">
+                                            <input type="hidden" name="id" value="@user.Id" />
+                                            <button type="submit" name="isApproved" value="false" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Are you sure you want to deny this user?');">
+                                                <i class="fas fa-times"></i> Deny
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center p-4">
+                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No pending approvals at the moment.</h5>
+                    <p>When new users register, they will appear here.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>```
