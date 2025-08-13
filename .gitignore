@@ -1,0 +1,8 @@
+# .NET/VS build & local files
+bin/
+obj/
+*.user
+*.suo
+*.mdf
+*.ldf
+.vs/
